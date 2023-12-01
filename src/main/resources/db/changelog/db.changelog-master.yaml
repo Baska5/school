@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - logicalFilePath: no-path
+
+  - include:
+      file: changes/group.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: changes/student.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: changes/teacher.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: changes/student_group.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: changes/teacher_group.yaml
+      relativeToChangelogFile: true

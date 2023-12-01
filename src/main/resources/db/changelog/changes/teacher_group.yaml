@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTeacherGroupTable
+      author: nikoloz_basiashvili
+      changes:
+        - createTable:
+            tableName: teacher_group
+            columns:
+              - column:
+                  name: teacher_id
+                  type: BIGINT
+              - column:
+                  name: group_id
+                  type: BIGINT
+        - addPrimaryKey:
+            columnNames: teacher_id, group_id
+            tableName: teacher_group
+            constraintName: pk_teacher_group
+        - addForeignKeyConstraint:
+            baseTableName: teacher_group
+            baseColumnNames: teacher_id
+            referencedTableName: teacher
+            referencedColumnNames: id
+            constraintName: fk_teacher_group_teacher
+        - addForeignKeyConstraint:
+            baseTableName: teacher_group
+            baseColumnNames: group_id
+            referencedTableName: group
+            referencedColumnNames: id
+            constraintName: fk_teacher_group_group

@@ -1,19 +1,17 @@
 package com.softgen.school.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-@EqualsAndHashCode
-@ToString
+@Data
 @Entity
-@Table(name="group")
+@Table(name = "group")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +22,7 @@ public class Group {
     private String groupName;
 
     @Column(name = "group_number", nullable = false, unique = true)
-    private String groupNumber;
+    private Integer groupNumber;
 
     @ManyToMany(mappedBy = "groups")
     private Set<Student> students;

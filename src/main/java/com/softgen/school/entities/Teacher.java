@@ -1,17 +1,16 @@
 package com.softgen.school.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-@EqualsAndHashCode
-@ToString
+@Data
 @Entity
 @Table(name = "teacher")
 public class Teacher {

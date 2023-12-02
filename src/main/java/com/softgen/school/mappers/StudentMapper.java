@@ -9,7 +9,9 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface StudentMapper {
     Student mapCreateDto(StudentDto studentDto);
+
     @Mapping(target = "id", ignore = true)
     void mapUpdateDto(@MappingTarget Student student, StudentDto studentDto);
+
     StudentDto mapDao(Student student);
 }

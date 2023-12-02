@@ -1,7 +1,6 @@
 package com.softgen.school.services;
 
 import com.softgen.school.dtos.TeacherDto;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;

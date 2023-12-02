@@ -4,7 +4,7 @@ import com.softgen.school.dtos.GroupDto;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GroupServiceImpl implements GroupService{
+public class GroupServiceImpl implements GroupService {
     @Override
     public GroupDto createGroup(GroupDto groupDtO) {
         return null;

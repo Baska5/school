@@ -1,7 +1,6 @@
 package com.softgen.school.services;
 
 import com.softgen.school.dtos.GroupDto;
-import org.springframework.stereotype.Service;
 
 public interface GroupService {
     GroupDto createGroup(GroupDto groupDtO);

@@ -25,6 +25,6 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseTableName: teacher_group
             baseColumnNames: group_id
-            referencedTableName: group
+            referencedTableName: course_group
             referencedColumnNames: id
             constraintName: fk_teacher_group_group

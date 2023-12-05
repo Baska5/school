@@ -5,13 +5,20 @@ import com.softgen.school.entities.Student;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface StudentMapper {
-    Student mapCreateDto(StudentDto studentDto);
+    StudentMapper INSTANCE = Mappers.getMapper(StudentMapper.class);
 
     @Mapping(target = "id", ignore = true)
-    void mapUpdateDto(@MappingTarget Student student, StudentDto studentDto);
+    Student mapCreateStudentDto(StudentDto studentDto);
 
-    StudentDto mapDao(Student student);
+    @Mapping(target = "id", ignore = true)
+    void mapUpdateStudentDto(@MappingTarget Student student, StudentDto studentDto);
+
+    Student mapStudentDto(StudentDto studentDto);
+
+    StudentDto mapStudentDao(Student student);
+
 }

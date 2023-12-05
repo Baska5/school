@@ -1,10 +1,10 @@
 package com.softgen.school.repositories;
 
-import com.softgen.school.entities.Student;
+import com.softgen.school.entities.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpecificationExecutor<Student> {
+public interface TeacherRepository extends JpaRepository<Teacher, Long>, JpaSpecificationExecutor<Teacher> {
     boolean existsByEmail(String email);
 
     boolean existsByPin(String pin);

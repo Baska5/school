@@ -1,10 +1,11 @@
 databaseChangeLog:
+  - objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
   - changeSet:
-      id: createGroupTable
+      id: createCourseGroupTable
       author: nikoloz_basiashvili
       changes:
         - createTable:
-            tableName: group
+            tableName: course_group
             columns:
               - column:
                   name: id

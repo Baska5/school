@@ -2,7 +2,7 @@ databaseChangeLog:
   - logicalFilePath: no-path
 
   - include:
-      file: changes/group.yaml
+      file: changes/course_group.yaml
       relativeToChangelogFile: true
 
   - include:

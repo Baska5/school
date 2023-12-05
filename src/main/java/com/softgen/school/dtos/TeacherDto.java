@@ -31,7 +31,6 @@ public class TeacherDto {
     @Email(message = "Invalid email")
     private String email;
 
-    @NotBlank(message = "Invalid birth date: Empty Birth date")
     @NotNull(message = "Invalid birth date: Birth date is null")
     private LocalDate birthDate;
 }

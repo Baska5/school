@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,11 +35,6 @@ public class Teacher {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @ManyToMany
-    @JoinTable(
-            name = "teacher_group",
-            joinColumns = @JoinColumn(name = "teacher_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id")
-    )
-    private Set<Group> groups;
+    @ManyToMany(mappedBy = "teachers")
+    private List<Group> groups = new ArrayList<>();
 }

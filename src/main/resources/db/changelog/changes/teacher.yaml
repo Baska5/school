@@ -47,12 +47,3 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     notNullConstraintName: nn_teacher_birthdate
-              - column:
-                  name: group_id
-                  type: BIGINT
-                  constraints:
-                    foreignKey:
-                      name: fk_teacher_group
-                      references:
-                        tableName: group
-                        columnNames: id

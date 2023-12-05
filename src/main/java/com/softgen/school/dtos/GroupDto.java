@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,7 +20,10 @@ public class GroupDto {
     @NotNull(message = "Invalid group name: Group name is null")
     private String groupName;
 
-    @NotBlank(message = "Invalid group number: Empty group number")
     @NotNull(message = "Invalid group number: Group number is null")
     private Integer groupNumber;
+
+    private List<StudentDto> students = new ArrayList<>();
+
+    private List<TeacherDto> teachers = new ArrayList<>();
 }

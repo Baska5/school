@@ -5,13 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "group")
+@Table(name = "course_group")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +25,20 @@ public class Group {
     @Column(name = "group_number", nullable = false, unique = true)
     private Integer groupNumber;
 
-    @ManyToMany(mappedBy = "groups")
-    private Set<Student> students;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "student_group",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private List<Student> students = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "groups")
-    private Set<Teacher> teachers;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "teacher_group",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "teacher_id")
+    )
+    private List<Teacher> teachers = new ArrayList<>();
+
 }

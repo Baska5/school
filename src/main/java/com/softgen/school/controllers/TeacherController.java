@@ -1,8 +1,10 @@
 package com.softgen.school.controllers;
 
+import com.softgen.school.dtos.StudentDto;
 import com.softgen.school.dtos.TeacherDto;
+import com.softgen.school.services.TeacherGroupService;
 import com.softgen.school.services.TeacherService;
-import lombok.AllArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,25 +12,40 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/teachers")
 public class TeacherController {
 
-    private TeacherService teacherService;
+    private final TeacherService teacherService;
 
-    // Create
+    private final TeacherGroupService teacherGroupService;
+
+    public TeacherController(TeacherService teacherService, TeacherGroupService teacherGroupService) {
+        this.teacherService = teacherService;
+        this.teacherGroupService = teacherGroupService;
+    }
+
     @PostMapping
-    public ResponseEntity<TeacherDto> createTeacher(@RequestBody TeacherDto teacherDto) {
+    public ResponseEntity<TeacherDto> createTeacher(@RequestBody @Valid TeacherDto teacherDto) {
         TeacherDto createdTeacher = teacherService.createTeacher(teacherDto);
         return new ResponseEntity<>(createdTeacher, HttpStatus.CREATED);
     }
 
-    // Read
+    @PostMapping("{teacherId}/group/{groupId}")
+    public ResponseEntity<String> addTeacherToGroup(@PathVariable Long teacherId, @PathVariable Long groupId) {
+        teacherGroupService.addTeacherToGroup(teacherId, groupId);
+        return new ResponseEntity<>("Teacher was added to group successfully", HttpStatus.OK);
+    }
+
     @GetMapping("/{teacherId}")
     public ResponseEntity<TeacherDto> getTeacherById(@PathVariable Long teacherId) {
         TeacherDto teacher = teacherService.getTeacherById(teacherId);
         return new ResponseEntity<>(teacher, HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<TeacherDto>> getAllTeachers(){
+        return new ResponseEntity<>(teacherService.getAllTeachers(), HttpStatus.OK);
     }
 
     @GetMapping("/search")
@@ -36,23 +53,26 @@ public class TeacherController {
             @RequestParam(required = false) String firstName,
             @RequestParam(required = false) String lastName,
             @RequestParam(required = false) String pin,
-            @RequestParam(required = false) LocalDate birthDate
-    ) {
+            @RequestParam(required = false) LocalDate birthDate) {
         List<TeacherDto> teachers = teacherService.searchTeachers(firstName, lastName, pin, birthDate);
         return new ResponseEntity<>(teachers, HttpStatus.OK);
     }
 
-    // Update
     @PutMapping("/{teacherId}")
-    public ResponseEntity<Void> updateTeacher(@PathVariable Long teacherId, @RequestBody TeacherDto updatedTeacherDto) {
-        teacherService.updateTeacher(teacherId, updatedTeacherDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<TeacherDto> updateTeacher(@PathVariable Long teacherId, @RequestBody @Valid TeacherDto updatedTeacherDto) {
+        TeacherDto updatedTeacher = teacherService.updateTeacher(teacherId, updatedTeacherDto);
+        return new ResponseEntity<>(updatedTeacher, HttpStatus.OK);
     }
 
-    // Delete
     @DeleteMapping("/{teacherId}")
-    public ResponseEntity<Void> deleteTeacher(@PathVariable Long teacherId) {
+    public ResponseEntity<String> deleteTeacher(@PathVariable Long teacherId) {
         teacherService.deleteTeacher(teacherId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Teacher was deleted successfully", HttpStatus.OK);
+    }
+
+    @DeleteMapping("{teacherId}/group/{groupId}")
+    public ResponseEntity<String> removeTeacherFromGroup(@PathVariable Long teacherId, @PathVariable Long groupId) {
+        teacherGroupService.removeTeacherFromGroup(teacherId, groupId);
+        return new ResponseEntity<>("Teacher was removed from group successfully", HttpStatus.OK);
     }
 }

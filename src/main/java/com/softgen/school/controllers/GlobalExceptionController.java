@@ -1,7 +1,9 @@
-package com.softgen.school.config;
+package com.softgen.school.controllers;
 
 import com.softgen.school.exceptions.DuplicateEntityException;
+import com.softgen.school.exceptions.DuplicateMembershipException;
 import com.softgen.school.exceptions.EntityNotFoundException;
+import com.softgen.school.exceptions.NotMemberException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException ex) {
@@ -33,20 +35,33 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DuplicateEntityException.class)
-    public ResponseEntity<Map<String, List<String>>> handleDuplicateException(DuplicateEntityException ex) {
+    public ResponseEntity<Map<String, List<String>>> handleDuplicateEntityException(DuplicateEntityException ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(Exception.class)
-    public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
+    @ExceptionHandler(DuplicateMembershipException.class)
+    public ResponseEntity<Map<String, List<String>>> handleDuplicateMembershipException(DuplicateMembershipException ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());
-        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotMemberException.class)
+    public ResponseEntity<Map<String, List<String>>> handleNotMemberException(NotMemberException ex) {
+        List<String> errors = Collections.singletonList(ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(RuntimeException.class)
     public final ResponseEntity<Map<String, List<String>>> handleRuntimeExceptions(RuntimeException ex) {
-        List<String> errors = Collections.singletonList(ex.getMessage());
+        List<String> errors = Collections.singletonList("Something went wrong");
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
+        System.out.println(ex.getMessage());
+        List<String> errors = Collections.singletonList("Something went wrong");
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

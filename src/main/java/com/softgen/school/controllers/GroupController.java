@@ -1,7 +1,6 @@
 package com.softgen.school.controllers;
 
 import com.softgen.school.dtos.GroupDto;
-import com.softgen.school.dtos.StudentDto;
 import com.softgen.school.services.GroupService;
 import com.softgen.school.services.StudentGroupService;
 import com.softgen.school.services.TeacherGroupService;
@@ -53,7 +52,7 @@ public class GroupController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<GroupDto>> getAllGroups(){
+    public ResponseEntity<List<GroupDto>> getAllGroups() {
         return new ResponseEntity<>(groupService.getAllGroups(), HttpStatus.OK);
     }
 

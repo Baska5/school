@@ -1,6 +1,5 @@
 package com.softgen.school.controllers;
 
-import com.softgen.school.dtos.StudentDto;
 import com.softgen.school.dtos.TeacherDto;
 import com.softgen.school.services.TeacherGroupService;
 import com.softgen.school.services.TeacherService;
@@ -44,7 +43,7 @@ public class TeacherController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<TeacherDto>> getAllTeachers(){
+    public ResponseEntity<List<TeacherDto>> getAllTeachers() {
         return new ResponseEntity<>(teacherService.getAllTeachers(), HttpStatus.OK);
     }
 

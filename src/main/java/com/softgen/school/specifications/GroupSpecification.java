@@ -1,8 +1,6 @@
 package com.softgen.school.specifications;
 
-import com.softgen.school.criterias.StudentCriteria;
 import com.softgen.school.entities.Group;
-import com.softgen.school.entities.Student;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -15,7 +13,7 @@ public class GroupSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if (groupNumber != null){
+            if (groupNumber != null) {
                 predicates.add(criteriaBuilder.equal(root.get("groupNumber"), groupNumber));
             }
 

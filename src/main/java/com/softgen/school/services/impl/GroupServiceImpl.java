@@ -1,16 +1,13 @@
 package com.softgen.school.services.impl;
 
 import com.softgen.school.dtos.GroupDto;
-import com.softgen.school.dtos.StudentDto;
 import com.softgen.school.entities.Group;
-import com.softgen.school.entities.Student;
 import com.softgen.school.exceptions.DuplicateEntityException;
 import com.softgen.school.exceptions.EntityNotFoundException;
 import com.softgen.school.mappers.GroupMapper;
 import com.softgen.school.repositories.GroupRepository;
 import com.softgen.school.services.GroupService;
 import com.softgen.school.specifications.GroupSpecification;
-import com.softgen.school.specifications.StudentSpecification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 

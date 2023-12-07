@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface StudentService {
     StudentDto getStudentById(Long studentId);
+
     List<StudentDto> getAllStudents();
 
     List<StudentDto> searchStudents(String firstName, String lastName, String pin, LocalDate birthDate);

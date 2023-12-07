@@ -1,7 +1,6 @@
 package com.softgen.school.services.impl;
 
 import com.softgen.school.criterias.TeacherCriteria;
-import com.softgen.school.dtos.StudentDto;
 import com.softgen.school.dtos.TeacherDto;
 import com.softgen.school.entities.Teacher;
 import com.softgen.school.exceptions.DuplicateEntityException;

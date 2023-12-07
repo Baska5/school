@@ -60,7 +60,6 @@ public class GlobalExceptionController {
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
-        System.out.println(ex.getMessage());
         List<String> errors = Collections.singletonList("Something went wrong");
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
